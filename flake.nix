@@ -85,6 +85,13 @@
             # if lldb-server plattform --listen "*:1234" --server doesn't work then we can just disable the sandbox maybe but that then fucks wit reproducing the issue
             # just by running with sandbox doesn't fix the issue so we are good to lldb shit
             # also check metadata --format-version=1
+            # useful:
+            # type sqlx
+            # type cargo
+            # type cargo-sqlx
+            # ls -alh
+            # sqlx can accept the CARGO envvar to run with out needing to be invoked via cargo
+            # CARGO=${toolchain.outPath}/bin/cargo sqlx prepare
             buildPhase = ''
               export DATABASE_URL="postgres:///postgres?host=$PWD"
               rm -rf postgres-data
@@ -93,13 +100,7 @@
               sqlx database create
               sqlx migrate run
 
-              type sqlx
-              type cargo
-              type cargo-sqlx
-
-              ls -alh
-
-              RUSTBACKTRACE=1 cargo --verbose --frozen sqlx prepare
+               cargo sqlx prepare
             '';
 
             # not that needed but was nice in the more complex setup
