@@ -1,0 +1,21 @@
+[package]
+name = "bintrepro_metadata"
+version = "0.1.0"
+edition = "2021"
+license = "AGPL"
+
+[lib]
+name = "repro_metadata"
+path = "src/lib.rs"
+
+[dependencies]
+rustls = "0.23.12"
+sqlx = { version = "0.8.2", features = [
+  "runtime-tokio",
+  "tls-rustls-ring",
+  "macros",
+  "migrate",
+  "postgres",
+] }
+thiserror = "1.0.63"
+tokio = "1.40.0"
